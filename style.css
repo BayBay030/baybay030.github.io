@@ -1,0 +1,322 @@
+/* =========================================
+   💖 簡易設定區 (Easy Config) 💖
+   這裡集中了最常需要修改的設定，您可以直接改這裡的數值！
+   ========================================= */
+:root {
+    /* --- 🎨 顏色設定 (Colors) --- */
+    --bg-color: #ffdeeb;
+    /* 網頁背景色 (淺粉紅) */
+    --window-bg: #ffeef5;
+    /* 視窗背景色 (更淺的粉紅) */
+    --border-color: #ff8ed4;
+    /* 邊框、陰影和裝飾線條顏色 */
+    --text-color: #ff8ed4;
+    /* 文字顏色 */
+
+    /* 按鈕互動顏色 */
+    --hover-bg: #ffe6f0;
+    /* 滑鼠移過去時的背景色 */
+    --active-bg: #ffccd9;
+    /* 按下去時的背景色 */
+
+    /* --- 📏 大小與間距 (Sizes) --- */
+    --pet-size: 116px;
+    /* 小精靈的大小 (原本77px, 加大1.5倍後約116px) */
+    --window-max-width: 400px;
+    /* 視窗最寬多寬 */
+    --spacing-top: 50px;
+    /* 視窗距離頂部的空間 */
+    --spacing-bottom: 50px;
+    /* 視窗距離底部的空間 */
+}
+
+/* =========================================
+   👇 下面是進階樣式 (Advanced Styles)
+   除非您知道怎麼改，否則建議不動喔！
+   ========================================= */
+
+/* 重置與基礎設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    /* Background Image */
+    background-image: url('assets/background.gif');
+    background-size: auto 100%;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+
+    font-family: 'Press Start 2P', -apple-system, BlinkMacSystemFont, 'Microsoft JhengHei', 'PingFang TC', 'Heiti TC', sans-serif;
+    /* 像素字體 + 中文黑體 */
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* 靠上對齊，配合 padding-top */
+    min-height: 100vh;
+
+    overflow-y: auto;
+    /* 允許上下捲動 */
+    padding-top: var(--spacing-top);
+    padding-bottom: var(--spacing-bottom);
+}
+
+/* 主視窗樣式 (Windows 95/98 風格) */
+.main-window {
+    width: 90%;
+    max-width: var(--window-max-width);
+    background-color: var(--window-bg);
+    border: 4px solid var(--border-color);
+    box-shadow: 8px 8px 0px rgba(255, 142, 178, 0.5);
+    /* 陰影 */
+
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    position: relative;
+    margin-bottom: var(--spacing-bottom);
+}
+
+/* 標題列 */
+.title-bar {
+    background: linear-gradient(90deg, var(--border-color), #ffb6c1);
+    padding: 6px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+}
+
+.title-bar-controls button {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    background-color: var(--window-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: inset -1px -1px 0 var(--border-color), inset 1px 1px 0 #fff;
+    cursor: pointer;
+}
+
+/* 視窗內容區 */
+.window-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 個人檔案區塊 */
+.profile-section {
+    text-align: center;
+}
+
+.profile-frame {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--border-color);
+    overflow: hidden;
+    margin: 0 auto 15px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.bio-text {
+    font-size: 10px;
+    color: var(--border-color);
+    line-height: 1.4;
+}
+
+/* 連結區塊 */
+.links-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.link-block {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #fff0f5;
+    border: 2px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 12px;
+    box-shadow: 2px 2px 0 var(--border-color);
+    transition: all 0.1s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.link-block:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--border-color);
+    background-color: var(--hover-bg);
+}
+
+.link-block:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+    background-color: var(--active-bg);
+}
+
+/* 圖示 */
+.icon-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    image-rendering: pixelated;
+}
+
+/* 分隔線 */
+.separator-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.separator-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+/* 專案格子 (Project Grid) */
+.project-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #fff0f5;
+    border: 2px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 12px;
+    box-shadow: 2px 2px 0 var(--border-color);
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.grid-item:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--border-color);
+    background-color: var(--hover-bg);
+}
+
+.grid-item:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+    background-color: var(--active-bg);
+}
+
+.grid-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+/* 防止文字被擠壓 */
+body,
+button,
+input,
+textarea {
+    font-stretch: normal;
+    -webkit-font-smoothing: none;
+}
+
+/* 小精靈容器 */
+.pet-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    /* 讓點擊穿透 */
+    z-index: 100;
+}
+
+#pet {
+    position: absolute;
+    width: var(--pet-size);
+    /* 使用上方設定的大小 */
+    height: auto;
+    pointer-events: auto;
+    /* 讓小精靈可以被點擊/拖曳 */
+    cursor: grab;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+
+    /* 初始位置 */
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+}
+
+#pet:active {
+    cursor: grabbing;
+}
+
+/* 手機版調整 */
+@media (max-width: 400px) {
+    .main-window {
+        width: 95%;
+        margin: 10px;
+        margin-bottom: var(--spacing-bottom);
+    }
+}
+
+/* Kick 圖片區塊 */
+.kick-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.kick-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+.kick-img:hover {
+    transform: scale(1.05);
+}
