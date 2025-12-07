@@ -294,7 +294,7 @@ textarea {
 /* 手機版調整 */
 @media (max-width: 400px) {
     .main-window {
-        width: 95%;
+        width: 85%;
         margin: 10px;
         margin-bottom: var(--spacing-bottom);
     }
