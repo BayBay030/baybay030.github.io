@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⊹ 𝘽🜁𝙔𝘽🜁𝙔</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts for Retro Pixel Look -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <div class="main-window">
         <div class="title-bar">
-            <div class="title-bar-text">⊹ 𝘽🜁𝙔𝘽🜁𝙔.exe</div>
+            <div class="title-bar-text">⊹ 𝘽𝘼𝙔𝘽𝘼𝙔.exe</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
-                <button aria-label="Maximize"></button>
-                <button aria-label="Close"></button>
+                <button class="btn-min" aria-label="Minimize"></button>
+                <button class="btn-max" aria-label="Maximize"></button>
+                <button class="btn-close" aria-label="Close"></button>
             </div>
         </div>
 
@@ -30,47 +29,103 @@
                 </div>
                 <h1 class="username">@CYBER ⌁ DRIFTER | BayBay</h1>
                 <p class="bio-text">Arts X tech ✨</p>
+                <div class="tag-list">
+                    <span class="tag">#Illustration</span>
+                    <span class="tag">#Arts</span>
+                    <span class="tag">#Sculpture</span>
+                    <span class="tag">#3D Modeling</span>
+                    <span class="tag">#3D Print</span>
+                    <span class="tag">#AI coding</span>
+                </div>
+            </div>
+
+            <!-- 社群 Logo (單色, icon only, 置中) -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com/bay1215/" class="social-icon" aria-label="Facebook" target="_blank">
+                    <img src="assets/Facebook.png" alt="Facebook">
+                </a>
+                <a href="https://discord.com/users/994165038661251133" class="social-icon" aria-label="Discord" target="_blank">
+                    <img src="assets/Discord.png" alt="Discord">
+                </a>
+                <a href="https://www.youtube.com/@Bay-3x3studio" class="social-icon" aria-label="YouTube" target="_blank">
+                    <img src="assets/Youtube.png" alt="YouTube">
+                </a>
+                <a href="mailto:Brenda.suitcase@gmail.com" class="social-icon" aria-label="Email" target="_blank">
+                    <img src="assets/Gmail.png" alt="Email">
+                </a>
             </div>
 
             <!-- Links Section -->
             <div class="links-container">
-                <a href="https://www.facebook.com/bay1215/" class="link-block">
-                    <img src="assets/Star.gif" alt="star" class="icon-img">
-                    <span class="text">Facebook</span>
-                </a>
                 <a href="https://www.instagram.com/unicorn_mani/" class="link-block" target="_blank">
                     <img src="assets/Star.gif" alt="star" class="icon-img">
-                    <span class="text">Instagram | UNICORN MANI</span>
+                    <span class="text">Instagram | Unicorn Mani</span>
                 </a>
-                <a href="https://www.instagram.com/blahbay____" class="link-block">
+                <a href="https://www.instagram.com/blahbay____" class="link-block" target="_blank" rel="noopener">
                     <img src="assets/Star.gif" alt="star" class="icon-img">
                     <span class="text">Instagram | BayBay</span>
                 </a>
-                <a href="https://www.behance.net/baylin" class="link-block">
+                <a href="https://www.behance.net/baylin" class="link-block" target="_blank" rel="noopener">
                     <img src="assets/Star.gif" alt="star" class="icon-img">
                     <span class="text">Behance | Portfolio</span>
                 </a>
-                <a href="https://discord.com/users/994165038661251133" class="link-block">
+               <!--a href="Brenda.suitase@gmail.com" class="link-block">
                     <img src="assets/Star.gif" alt="star" class="icon-img">
-                    <span class="text">Discord | Baybay003</span>
-                </a>
-                <a href="https://www.youtube.com/@Bay-3x3studio" class="link-block">
-                    <img src="assets/Star.gif" alt="star" class="icon-img">
-                    <span class="text"> YOUTUBE| Music Studio</span>
-                </a>
+                    <span class="text">Email</span>
+               </a --!>
             </div>
 
-            <!-- Separator -->
+            <!-- Separator分隔線素材 -->
             <div class="separator-container">
                 <img src="assets/separator2.gif" alt="separator" class="separator-img">
             </div>
+
+            <!-- 作者簡介 (點擊展開) -->
+            <details class="about-section">
+                <summary class="about-summary">
+                    <img src="assets/outfit_4.png" alt="" class="about-avatar">
+                    <span class="about-title">關於作者 / About</span>
+                    <span class="about-arrow">▼</span>
+                </summary>
+                <div class="about-content" id="about-list">
+                    <p>嗨～我是 BayBay ✨</p>
+                    <p>一個遊走在藝術與科技之間的創作者，熱愛復古90s和Y2k、遊戲、音樂與程式碼。<br>【寫輪眼系藝術家】<br>平面與立體雙棲，觸碰的媒材非常多元。</p>
+                    <p>擅長繪畫、立體雕塑和概念藝術。<br>創作超過15年，自學coding一年。</p>
+                    <p>這裡放著我的作品和喜歡的東西，包含我自行製作的各種寶物，慢慢逛吧 ♡</p>
+                </div>
+            </details>
+
+            <!-- CV / 經歷 (點擊展開) -->
+            <details class="about-section">
+                <summary class="about-summary">
+                    <img src="assets/5eb34f56.gif" alt="" class="about-avatar">
+                    <span class="about-title">CV / 經歷</span>
+                    <span class="about-arrow">▼</span>
+                </summary>
+                <div class="about-content cv-content" id="cv-list">
+                    <p class="cv-entry"><span class="cv-year">2026</span> 光之夢 台南燈節，天鵝湖戶外公共藝術 ，臺南新營</p>
+                    <p class="cv-entry"><span class="cv-year">2025</span> You Glow, We grow聯展，River City Bangkok，泰國曼谷</p>
+                    <p class="cv-entry"><span class="cv-year">2025</span> One Art Taipei 藝術台北，聯展，Jr東日本大飯店，臺北</p>
+                    <p class="cv-entry"><span class="cv-year">2024</span> Mi casa su casa創作個展，Boxday Gallery 藝廊，高雄</p>
+                    <p class="cv-entry"><span class="cv-year">2024</span> 月津港燈節 - 獨角獸的月下夢境聯展，臺南鹽水</p>
+                    <p class="cv-entry"><span class="cv-year">2023</span> 台北國際玩具創作大展 聯展，華山文創園區，臺北</p>
+                    <p class="cv-entry"><span class="cv-year">2022</span> 亞洲插畫藝術博覽會, 承億酒店，高雄</p>
+                    <p class="cv-entry"><span class="cv-year">2022</span> 第十屆 台南藝術博覽會 台南晶英酒店，臺南</p>
+                    <p class="cv-entry"><span class="cv-year">2021</span> OneOffs NFT 國際藝術博覽會 ，W hotel，臺北</p>
+                    <p class="cv-entry"><span class="cv-year">2021</span> 高雄漾藝博Young Art Kaohsiung, 駁二藝術特區, 高雄</p>
+                    <p class="cv-entry"><span class="cv-year">2021</span> 日光群島-創作個展，靠邊走藝術空間，臺北</p>
+                    <p class="cv-entry"><span class="cv-year">2019</span> 臺灣文博會，圓山花博爭艷館，臺北</p>
+                    <p class="cv-entry"><span class="cv-year">2019</span> 上海國際潮流玩具展，世博展覽館，上海</p>
+                </div>
+            </details>
 
             <!-- Project Grid (2x3) -->
             <div class="project-grid">
                 <a href="https://bay-design-tools.vercel.app" class="grid-item" target="_blank">
                     <img src="assets/A.gif" alt="設計師小工具" class="grid-icon">
                     <span>設計師小工具</span>
-                    <!--/a>
+                </a>
+                <!-- 玩具工作室、樹洞暫時隱藏
                 <a href="https://unicorn-mani-toystudio.vercel.app" class="grid-item" target="_blank">
                     <img src="assets/B.gif" alt="玩具工作室" class="grid-icon">
                     <span>玩具工作室</span>
@@ -78,46 +133,48 @@
                 <a href="https://baybay030.github.io/Treehole/#/treehole" class="grid-item" target="_blank">
                     <img src="assets/C.gif" alt="樹洞" class="grid-icon">
                     <span>樹洞</span>
-                </a>-->
-                    <a href="https://baybay030.github.io/Reading_Note/" class="grid-item" target="_blank">
-                        <img src="assets/D.gif" alt="閱讀筆記" class="grid-icon">
-                        <span>閱讀筆記</span>
-                    </a>
-                    <a href="https://www.notion.com/zh-tw/templates/idea-book-01?assetsVersion=23.13.20251202.1926&cookie_sync_completed=true"
-                        class="grid-item" target="_blank">
-                        <img src="assets/E.gif" alt="Notion模板" class="grid-icon">
-                        <span>Notion模板</span>
-                    </a>
-                    <!--a href="https://suni-room.vercel.app/" class="grid-item" target="_blank">
+                </a>
+                -->
+                <a href="https://baybay030.github.io/Reading_Note/" class="grid-item" target="_blank">
+                    <img src="assets/D.gif" alt="閱讀筆記" class="grid-icon">
+                    <span>閱讀筆記</span>
+                </a>
+                <a href="https://www.notion.com/zh-tw/templates/idea-book-01?assetsVersion=23.13.20251202.1926&cookie_sync_completed=true"
+                    class="grid-item" target="_blank">
+                    <img src="assets/E.gif" alt="Notion模板" class="grid-icon">
+                    <span>Notion模板</span>
+                </a>
+                <!-- 小房間暫時隱藏
+                <a href="https://suni-room.vercel.app/" class="grid-item" target="_blank">
                     <img src="assets/F.gif" alt="小房間" class="grid-icon">
                     <span>小房間</span>
-                </a>-->
+                </a>
+                -->
             </div>
 
             <!-- Kick Images Grid -->
             <div class="kick-grid">
-                <img src="assets/kick/0580fda1.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/08da7e0c.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/0c1764a6.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/13875ab8.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/39260aaf.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/418a5bc8.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/57cfc9d0.png" alt="kick" class="kick-img">
-                <img src="assets/kick/62fdbf40.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/8a101d2a.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/92dc81db.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/9b1a000d.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/ac01abf9.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/cb41eba1.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/cc3ec0c0.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/cd1722a8.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/d2798764.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/dcb0c2b1.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/e020e570.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/e316038d.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/e3dffa8f.gif" alt="kick" class="kick-img">
-                <img src="assets/kick/fa630ada.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick1.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick2.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick3.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick4.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick5.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick6.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick7.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick8.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick9.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick10.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick11.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick12.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick13.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick14.gif" alt="kick" class="kick-img">
+                <img src="assets/kick/kick15.gif" alt="kick" class="kick-img">
             </div>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                website designer : BAYBAY
+            </footer>
         </div>
     </div>
 

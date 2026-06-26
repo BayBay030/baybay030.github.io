@@ -1,3 +1,68 @@
+// --- 載入 CV.txt (一行一筆, 開頭4位數字為年份) ---
+// 想更新經歷, 直接編輯同資料夾的 CV.txt 即可
+document.addEventListener('DOMContentLoaded', () => {
+    const cvList = document.getElementById('cv-list');
+    if (!cvList) return;
+
+    fetch('CV.txt?v=' + Date.now())
+        .then((res) => {
+            if (!res.ok) throw new Error('CV.txt not found');
+            return res.text();
+        })
+        .then((text) => {
+            const lines = text.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+            if (lines.length === 0) return; // 空檔就保留後備內容
+            cvList.innerHTML = '';
+            lines.forEach((line) => {
+                const p = document.createElement('p');
+                p.className = 'cv-entry';
+                const match = line.match(/^(\d{4})\s*(.*)$/);
+                if (match) {
+                    const year = document.createElement('span');
+                    year.className = 'cv-year';
+                    year.textContent = match[1];
+                    p.appendChild(year);
+                    p.appendChild(document.createTextNode(' ' + match[2]));
+                } else {
+                    p.textContent = line;
+                }
+                cvList.appendChild(p);
+            });
+        })
+        .catch(() => {
+            /* 載入失敗 (例如以 file:// 直接開啟) 就保留 HTML 內的後備內容 */
+        });
+});
+
+// --- 載入 About.txt (空行分段落, 段內換行保留) ---
+// 想更新介紹, 直接編輯同資料夾的 About.txt 即可
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutEl = document.getElementById('about-list');
+    if (!aboutEl) return;
+
+    fetch('About.txt?v=' + Date.now())
+        .then((res) => {
+            if (!res.ok) throw new Error('About.txt not found');
+            return res.text();
+        })
+        .then((text) => {
+            const blocks = text.replace(/\r/g, '').split(/\n\s*\n/).map((b) => b.trim()).filter((b) => b.length > 0);
+            if (blocks.length === 0) return; // 空檔就保留後備內容
+            aboutEl.innerHTML = '';
+            blocks.forEach((block) => {
+                const p = document.createElement('p');
+                block.split('\n').forEach((line, i) => {
+                    if (i > 0) p.appendChild(document.createElement('br'));
+                    p.appendChild(document.createTextNode(line));
+                });
+                aboutEl.appendChild(p);
+            });
+        })
+        .catch(() => {
+            /* 載入失敗 (例如以 file:// 直接開啟) 就保留 HTML 內的後備內容 */
+        });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const pet = document.getElementById('pet');
     const container = document.body; // Use body as boundary
