@@ -170,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const info = infoFor(src);
         modalImg.src = src;
         modalTitle.textContent = info.title;
-        modalMeta.textContent = [info.main, info.date].filter(Boolean).join('  ·  ');
+        const year = (info.date || '').slice(0, 4); // 只取年份
+        modalMeta.textContent = [info.main, year].filter(Boolean).join('  ·  ');
         // body 以換行呈現
         modalDesc.innerHTML = '';
         (info.body || '').split('\n').forEach((line, i) => {
