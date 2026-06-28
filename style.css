@@ -64,6 +64,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-color);
     /* Background Image */
@@ -77,9 +81,10 @@ body {
     /* 像素字體(英文,縮小) + CJK黑體(中文,放大) */
 
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    /* 靠上對齊，配合 padding-top */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* 直向堆疊, 水平置中 */
     min-height: 100vh;
 
     overflow-y: auto;
@@ -511,4 +516,361 @@ textarea {
 
 .kick-img:hover {
     transform: scale(1.05);
+}
+
+/* =========================================
+   ✦ 像素 / 點陣 過場 (固定全螢幕疊層)
+   --p : 捲動進度 (0~1, 錨點 CV → 塔羅齒輪), 由 script.js 寫入
+   ========================================= */
+.pixel-overlay {
+    --p: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 掃描線 (環境層), 隨進度淡入 */
+    background-image: repeating-linear-gradient(0deg,
+            rgba(255, 142, 212, 0.06) 0, rgba(255, 142, 212, 0.06) 1px,
+            transparent 1px, transparent 3px);
+    opacity: clamp(0, calc(var(--p) * 6), 1);
+}
+
+/* 點陣容器: 鋪滿整個視窗 ; --cols / --rows 由 JS 設定
+   gap = 像素之間的縫隙, 讓畫布1從縫透出來 → 一顆顆的點狀感 */
+.pixel-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 14), 1fr);
+    grid-template-rows: repeat(var(--rows, 24), 1fr);
+    gap: 4px;
+    padding: 4px;
+}
+
+/* 單顆像素點 ; --t = 位置門檻 (0~1, 下→上)
+   進場壓矮: fill 在 p≈0→0.5 就灌滿覆蓋
+   中段拉長: 全覆蓋停留 p≈0.5→0.88
+   退場延後變慢: clear 在 p≈0.88→1 才由下往上清空露出
+   逐顆 scale 彈出 = 像素一顆顆把畫布1吃掉的感覺 */
+.pixel-dot {
+    background-color: var(--border-color);
+    opacity: clamp(0,
+            calc(clamp(0, calc((var(--p) - var(--t) * 0.4) * 9), 1) - clamp(0, calc((var(--p) - 0.75 - var(--t) * 0.08) * 5), 1)),
+            1);
+    transform: scale(clamp(0, calc((var(--p) - var(--t) * 0.4) * 11), 1));
+    will-change: opacity, transform;
+}
+
+/* 中央 LOADING 字 (次層): 接近全覆蓋時浮現, 結尾淡出 */
+.pixel-caption {
+    position: relative;
+    z-index: 2;
+    color: var(--text-color);
+    font-size: 14px;
+    letter-spacing: 2px;
+    background: rgba(255, 238, 245, 0.85);
+    padding: 8px 14px;
+    border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0 var(--border-color);
+    opacity: clamp(0,
+            calc(clamp(0, calc((var(--p) - 0.3) * 6), 1) - clamp(0, calc((var(--p) - 0.85) * 12), 1)),
+            1);
+    image-rendering: pixelated;
+}
+
+.pixel-caret {
+    display: inline-block;
+    margin-left: 2px;
+    animation: pixelBlink 0.8s steps(1) infinite;
+}
+
+@keyframes pixelBlink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   ✦ 第二畫布: 全幅塔羅齒輪 (圓心在左右邊緣)
+   --rot-l / --rot-r 由 script.js 寫入
+   ========================================= */
+.tarot-stage {
+    --rot-l: 0deg;
+    --rot-r: 0deg;
+    position: relative;
+    width: 100%;
+    /* 給齒輪轉動 + 圓心上升的捲動空間 */
+    min-height: 230vh;
+    /* 蓋在像素疊層(z-index:40)之上 */
+    z-index: 41;
+}
+
+/* 釘住的舞台 */
+.tarot-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.tarot-title {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color);
+    text-shadow: 1px 1px 0 #fff;
+    z-index: 3;
+}
+
+/* 圓心: 貼在視窗左右邊緣, 偏下 (幾乎在畫面外)
+   --rise 由 script.js 隨捲動寫入: 越往下捲圓心越往上抬, 露出更多圓 */
+.edge-gear {
+    position: absolute;
+    top: 90%;
+    width: 0;
+    height: 0;
+    transform: translateY(var(--rise, 0px));
+}
+
+.edge-gear.left {
+    left: 0;
+}
+
+.edge-gear.right {
+    right: 0;
+}
+
+.rotor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.edge-gear.left .rotor {
+    transform: rotate(var(--rot-l));
+}
+
+.edge-gear.right .rotor {
+    transform: rotate(var(--rot-r));
+}
+
+/* 每張塔羅牌繞圓心排列 ; --i 序號, --gap 角距, --R 半徑 (朝畫面中央)
+   left: 往右扇出 ; right: 往左扇出 ; 以第 4 張為朝內基準 */
+.tarot-card {
+    --gap: 30deg;
+    --R: clamp(190px, 56vw, 360px);
+    position: absolute;
+    /* 放大 30% (64x96 → 83x125) */
+    width: 83px;
+    height: 125px;
+    margin: -62.5px -41.5px;
+}
+
+.edge-gear.left .tarot-card {
+    transform: rotate(calc((var(--i) - 4) * var(--gap))) translateX(var(--R));
+}
+
+.edge-gear.right .tarot-card {
+    transform: rotate(calc((4 - var(--i)) * var(--gap))) translateX(calc(-1 * var(--R)));
+}
+
+.tarot-card {
+    cursor: pointer;
+}
+
+.tarot-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 5px;
+    background: #fff0f5;
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    border-radius: 8px;
+    image-rendering: pixelated;
+    transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* hover 放大 (彈跳), 並提到最上層 */
+.tarot-card:hover {
+    z-index: 5;
+}
+
+.tarot-card:hover img {
+    transform: scale(3);
+    box-shadow: 4px 4px 0 var(--border-color);
+}
+
+.tarot-top {
+    position: absolute;
+    bottom: 7vh;
+    left: 0;
+    right: 0;
+    width: max-content;
+    margin: 0 auto;
+    z-index: 3;
+    pointer-events: auto;
+    font-size: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    background-color: #fff0f5;
+    transition: all 0.1s ease;
+}
+
+.tarot-top:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--border-color);
+    background-color: var(--hover-bg);
+}
+
+/* =========================================
+   ✦ 卡片點開: 浮在正中央 + 文字說明 (lightbox)
+   ========================================= */
+.card-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    /* 預設隱藏 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.card-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.card-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 142, 212, 0.35);
+    backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.card-modal-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 320px;
+    width: 100%;
+    /* 進場: 從小彈出 */
+    transform: scale(0.8);
+    transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-modal.open .card-modal-inner {
+    transform: scale(1);
+}
+
+.card-modal-img {
+    /* 依原圖比例縮放: 直圖受高度上限(300px)約束、橫圖受寬度上限約束 */
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    max-width: min(82vw, 320px);
+    object-fit: contain;
+    padding: 8px;
+    background: #fff0f5;
+    border: 3px solid var(--border-color);
+    box-shadow: 6px 6px 0 var(--border-color);
+    border-radius: 12px;
+    image-rendering: pixelated;
+}
+
+.card-modal-text {
+    text-align: center;
+    background: var(--window-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0 var(--border-color);
+    padding: 12px 16px;
+    max-width: min(82vw, 320px);
+}
+
+.card-modal-title {
+    font-size: 13px;
+    color: var(--text-color);
+    text-shadow: 1px 1px 0 #fff;
+    margin-bottom: 4px;
+}
+
+/* 分類 · 日期 */
+.card-modal-meta {
+    font-size: 9px;
+    color: var(--border-color);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.card-modal-desc {
+    font-size: 10px;
+    line-height: 1.8;
+    color: #696969;
+    text-align: left;
+    /* 長文案可在框內捲動 */
+    max-height: 28vh;
+    overflow-y: auto;
+}
+
+.card-modal-desc:empty {
+    display: none;
+}
+
+.card-modal-close {
+    position: absolute;
+    top: -14px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    color: var(--text-color);
+    background: var(--window-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* 降低動態偏好: 關閉像素疊層與齒輪轉動 */
+@media (prefers-reduced-motion: reduce) {
+    .pixel-overlay {
+        display: none;
+    }
+
+    .tarot-stage {
+        min-height: auto;
+        padding: 40px 0;
+    }
+
+    .tarot-pin {
+        position: static;
+        height: auto;
+    }
 }

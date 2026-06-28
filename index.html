@@ -11,7 +11,7 @@
 
 <body>
 
-    <div class="main-window">
+    <div class="main-window" id="top">
         <div class="title-bar">
             <div class="title-bar-text">⊹ 𝘽𝘼𝙔𝘽𝘼𝙔.exe</div>
             <div class="title-bar-controls">
@@ -96,7 +96,7 @@
             </details>
 
             <!-- CV / 經歷 (點擊展開) -->
-            <details class="about-section">
+            <details class="about-section" id="cvSection">
                 <summary class="about-summary">
                     <img src="assets/5eb34f56.gif" alt="" class="about-avatar">
                     <span class="about-title">經歷 / CV  </span>
@@ -175,6 +175,71 @@
             <footer class="site-footer">
                 website designer : BAYBAY
             </footer>
+        </div>
+    </div>
+
+    <!-- ===== 固定全螢幕 像素過場疊層 (錨點: CV → 塔羅齒輪) ===== -->
+    <div class="pixel-overlay" id="pixelOverlay" aria-hidden="true">
+        <div class="pixel-grid" id="pixelGrid"></div>
+        <div class="pixel-caption">
+            <span class="pixel-caption-text">LOADING ROOM_02</span><span class="pixel-caret">█</span>
+        </div>
+    </div>
+
+    <!-- ===== 第二畫布: 全幅塔羅齒輪 (圓心在左右邊緣) ===== -->
+    <section class="tarot-stage" id="tarotStage">
+        <div class="tarot-pin">
+            <h2 class="tarot-title">⊹ ARTS GALLERY  ⊹</h2>
+
+            <div class="edge-gear left" id="gearLeft">
+                <div class="rotor">
+                    <div class="tarot-card" style="--i:0"><img src="assets/BAY%202/images/windowsuni-2024-9497.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:1"><img src="assets/BAY%202/images/wearealian-2024-0239.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:2"><img src="assets/BAY%202/images/the-house-of-no-time-2024-8255.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:3"><img src="assets/BAY%202/images/onlyplace-2024-1047.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:4"><img src="assets/BAY%202/images/nemasdesuni-2024-6498.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:5"><img src="assets/BAY%202/images/mi-casa-su-casa-2024-0029.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:6"><img src="assets/BAY%202/images/me-time-2024-2319.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:7"><img src="assets/BAY%202/images/inner-heart-2024-3543.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:8"><img src="assets/BAY%202/images/demon-chu-2024-5812.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:9"><img src="assets/BAY%202/images/angel-chu-2024-2959.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:10"><img src="assets/BAY%202/images/1decade-cake-2024-0331.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:11"><img src="assets/BAY%202/images/suni-icecream-shop-2026-0232.webp" alt=""></div>
+                </div>
+            </div>
+
+            <div class="edge-gear right" id="gearRight">
+                <div class="rotor">
+                    <div class="tarot-card" style="--i:0"><img src="assets/BAY%202/images/catgrass-2019-5223.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:1"><img src="assets/BAY%202/images/the-silent-goddess-2025-4396.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:2"><img src="assets/BAY%202/images/no-rush-2025-9751.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:3"><img src="assets/BAY%202/images/island-2025-4197.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:4"><img src="assets/BAY%202/images/inner-room-2025-4043.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:5"><img src="assets/BAY%202/images/flu-2025-8945.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:6"><img src="assets/BAY%202/images/pocket-heart-suni-2026-1796.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:7"><img src="assets/BAY%202/images/atta-2026-5688.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:8"><img src="assets/BAY%202/images/unicorn-icecream-2026-3954.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:9"><img src="assets/BAY%202/images/mehero-2024-3946.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:10"><img src="assets/BAY%202/images/wishofshootingstar-2024-5669.webp" alt=""></div>
+                    <div class="tarot-card" style="--i:11"><img src="assets/BAY%202/images/midwaylifesjourney-2024-9705.webp" alt=""></div>
+                </div>
+            </div>
+
+            <a class="tarot-top" href="#top">▲ Back to top</a>
+        </div>
+    </section>
+
+    <!-- 卡片點開: 浮在正中央 + 文字說明 -->
+    <div class="card-modal" id="cardModal" aria-hidden="true">
+        <div class="card-modal-backdrop" data-close></div>
+        <div class="card-modal-inner">
+            <button class="card-modal-close" data-close aria-label="Close">✕</button>
+            <img class="card-modal-img" id="cardModalImg" src="" alt="">
+            <div class="card-modal-text">
+                <h3 class="card-modal-title" id="cardModalTitle"></h3>
+                <p class="card-modal-meta" id="cardModalMeta"></p>
+                <p class="card-modal-desc" id="cardModalDesc"></p>
+            </div>
         </div>
     </div>
 
