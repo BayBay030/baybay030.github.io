@@ -366,6 +366,20 @@ textarea {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* 訪客計數器 (Moe Counter) */
+.visit-counter {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.visit-counter img {
+    width: 140px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
 /* Footer */
 .site-footer {
     width: 100%;
@@ -484,6 +498,11 @@ textarea {
 
 .about-content p {
     margin-bottom: 12px;
+}
+
+/* CV 內文小一級 */
+.cv-content {
+    font-size: 11px;
 }
 
 /* CV 經歷條目 */
